@@ -11,14 +11,16 @@
         Virtual Program
       </label>
     </div>
-    <br>
+    <br />
     <mat-form-field>
       <mat-label>Select Virtual Program</mat-label>
+
       <mat-select
         [(value)]="selectedPrograms"
         multiple
         (selectionChange)="onSelectionChange($event)"
       >
+        <mat-option [value] = 'selectAll'>Select All</mat-option>
         <mat-option
           *ngFor="let program of programList"
           [value]="program['programId']"
@@ -27,19 +29,13 @@
       </mat-select>
     </mat-form-field>
     <br />
-    <!-- <mat-form-field>
+    <mat-form-field>
       <mat-label>Select Project</mat-label>
-      <mat-select
-        [(value)]="selectedPrograms"
-        multiple
-        (selectionChange)="onSelectionChange($event)"
-      >
-        <mat-option
-          *ngFor="let program of programList"
-          [value]="program['programId']"
-          >{{ program["programName"] }}</mat-option
-        >
+      <mat-select multiple>
+        <mat-option *ngFor="let project of resultArray" [value]="project">{{
+          project["projectName"]
+        }}</mat-option>
       </mat-select>
-    </mat-form-field> -->
+    </mat-form-field>
   </div>
 </div>

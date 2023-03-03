@@ -17,11 +17,37 @@ export class HomeComponent {
 
   selectedPrograms: string[] = [];
 
+  resultArray: projectinterface[] = [];
 
+  selectAll = [];
 
   onSelectionChange(event: MatSelectChange) {
     this.selectedPrograms = event.value;
     console.log(this.selectedPrograms);
+
+    if (this.selectedPrograms == this.selectAll) {
+      this.selectedPrograms.pop();
+      for (let i = 0; i < this.programList.length; i++) {
+        this.selectedPrograms.push(this.programList[i].programId);
+      }
+    } else {
+      const filteredArray = this.projectList.filter((project) => {
+        return this.selectedPrograms.some(
+          (program) => project.programID == program
+        );
+      });
+
+      const uniqueArray: projectinterface[] = filteredArray.filter(
+        (project, projectindex, filteredArray) => {
+          return (
+            filteredArray.findIndex(
+              (i) => i.projectName === project.projectName
+            ) === projectindex
+          );
+        }
+      );
+      this.resultArray = uniqueArray;
+    }
   }
 
   getApis() {
